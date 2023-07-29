@@ -1,0 +1,84 @@
+Introduction:
+As a MEAN Stack Developer, the task at hand is to deploy an Angular application on a Docker container hosted on an AWS EC2 instance. This deployment will enable other developers to access and modify the application as needed. To ensure a smooth and organized workflow, we will be utilizing Node.js, Angular CLI, GitHub, and Docker for containerization.
+
+Step-by-Step Process:
+
+Version Control with GitHub:
+
+Create a new GitHub repository to track the source code of the Angular application.
+Use Git to initialize version control in your local project directory.
+Create a .gitignore file to specify files and directories that should be excluded from version control (e.g., node_modules, build artifacts).
+Commit the initial codebase to the local Git repository.
+Setting Up the Angular Application:
+
+Ensure you have Node.js and Angular CLI installed on your local machine.
+Create a new Angular project using Angular CLI:
+arduino
+Copy code
+ng new your-angular-app
+cd your-angular-app
+Development and Testing:
+
+Develop and test the Angular application locally to ensure it works as expected.
+Use version control effectively by making frequent commits and writing meaningful commit messages.
+Building the Angular Application:
+
+Use the Angular CLI to build a production-ready version of the application:
+css
+Copy code
+ng build --prod
+This will generate a "dist" folder containing all the required files to run the application.
+Dockerization:
+
+Create a Dockerfile in the root of the project to define the Docker image for your Angular application.
+The Dockerfile should start from a base image with Node.js pre-installed.
+Copy the contents of the "dist" folder into the Docker image.
+Expose the necessary port for the Angular application to run (e.g., port 80).
+Docker Image Creation and Testing:
+
+Build the Docker image using the Dockerfile:
+Copy code
+docker build -t your-angular-app .
+Test the Docker image locally to ensure everything is working correctly:
+arduino
+Copy code
+docker run -p 80:80 your-angular-app
+Access the application in your web browser at http://localhost:80.
+Amazon Web Services (AWS) Setup:
+
+Log in to your AWS account and navigate to the EC2 Dashboard.
+Launch a new EC2 instance, choosing the appropriate region, instance type, and network settings.
+Ensure that the security group associated with the EC2 instance allows inbound traffic on port 80 (HTTP) so that users can access the application.
+Pushing to Docker Hub (Optional):
+
+Optionally, you can push the Docker image to a container registry like Docker Hub to make it accessible to other developers.
+Create an account on Docker Hub if you don't have one.
+Tag your Docker image with your Docker Hub username and the repository name:
+bash
+Copy code
+docker tag your-angular-app your-docker-hub-username/your-angular-app
+Push the image to Docker Hub:
+bash
+Copy code
+docker push your-docker-hub-username/your-angular-app
+Deploying the Docker Container on EC2:
+
+SSH into your EC2 instance using the provided public key (or a key pair you generated during instance creation):
+css
+Copy code
+ssh -i /path/to/your-key.pem ec2-user@your-ec2-instance-ip
+Pull the Docker image from Docker Hub (if you pushed it):
+bash
+Copy code
+docker pull your-docker-hub-username/your-angular-app
+Run the Docker container on the EC2 instance:
+arduino
+Copy code
+docker run -d -p 80:80 your-angular-app
+Final Steps and Submission:
+
+Document the entire process, including all the commands used, in a well-structured README.md file.
+Mention the GitHub repository link in the README.md file for tracking and reviewing the code.
+Verify that the deployed Angular application is accessible from the public IP address of the EC2 instance.
+Finally, submit the GitHub repository link to the management for review and assessment.
+By following these steps, the Angular application will be successfully deployed on a Docker container hosted on an AWS EC2 instance, allowing other developers to collaborate and contribute to the project efficiently.
